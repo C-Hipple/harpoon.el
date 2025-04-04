@@ -18,8 +18,11 @@
 ;; Then you can add files with that command, and then jump to them immediately.
 
 ;;; Code:
+
+;;;###autoload
 (setq harpoon--file "~/harpoon-el")
 
+;;;###autoload
 (defun harpoon--open-file (line-number)
   "Reads `~/harpoon-el` and opens the file on LINE-NUMBER in the existing buffer if it's a valid file."
   (interactive)
@@ -38,6 +41,7 @@
       (message "%s is not readable." harpoon-file))))
 
 
+;;;###autoload
 (defun harpoon-add-file (line-number)
   "Adds the current buffer's file path to `~/harpoon-el` at LINE-NUMBER, replacing the existing line."
   (interactive)
@@ -59,6 +63,7 @@
             (message "Replaced line %d of %s with '%s'" line-number harpoon-file current-file)))))))
 
 
+;;;###autoload
 (defun harpoon-open-or-create ()
   "Opens (and creates if it doesn't exist) the file `~/harpoon-el` in a minibuffer and moves the cursor to it."
   (interactive)
@@ -69,17 +74,5 @@
           (switch-to-buffer (current-buffer)))
       (find-file file-path))))
 
-
-(define-key evil-normal-state-map (kbd "SPC h A") 'harpoon-open-or-create)
-
-(define-key evil-normal-state-map (kbd "SPC h 1") (lambda () (interactive) (harpoon--open-file 1)))
-(define-key evil-normal-state-map (kbd "SPC h 2") (lambda () (interactive) (harpoon--open-file 2)))
-(define-key evil-normal-state-map (kbd "SPC h 3") (lambda () (interactive) (harpoon--open-file 3)))
-(define-key evil-normal-state-map (kbd "SPC h 4") (lambda () (interactive) (harpoon--open-file 4)))
-
-(define-key evil-normal-state-map (kbd "SPC h a 1") (lambda () (interactive) (harpoon-add-file 1)))
-(define-key evil-normal-state-map (kbd "SPC h a 2") (lambda () (interactive) (harpoon-add-file 2)))
-(define-key evil-normal-state-map (kbd "SPC h a 3") (lambda () (interactive) (harpoon-add-file 3)))
-(define-key evil-normal-state-map (kbd "SPC h a 4") (lambda () (interactive) (harpoon-add-file 4)))
 
 (provide 'harpoon)
