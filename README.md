@@ -3,8 +3,18 @@ A minimalist port of The Primegean's vim plugin Harpoon to emacs (as I remember 
 
 [Documentation](https://harpoonel.readthedocs.io/en/latest/)
 
-## TODO:
-Consider using buffers OR files
+## Quickstart
+
+1. Install the package using your favorite emacs package manager
+
+2. Bind the keys as below.
+
+3. Add a file OR buffer to your harpoon using the add command.
+
+4. Naviate to another buffer.
+
+5. Harpoon back to that file using the open-entry function.
+
 
 ## Keybindings
 
