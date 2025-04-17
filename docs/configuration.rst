@@ -20,22 +20,22 @@ For regular Emacs users:
 .. code-block:: elisp
 
    (global-set-key (kbd "C-c h A") 'harpoon-open-or-create)
-   (global-set-key (kbd "C-c h 1") (lambda () (interactive) (harpoon--open-file 1)))
-   (global-set-key (kbd "C-c h 2") (lambda () (interactive) (harpoon--open-file 2)))
-   (global-set-key (kbd "C-c h 3") (lambda () (interactive) (harpoon--open-file 3)))
-   (global-set-key (kbd "C-c h 4") (lambda () (interactive) (harpoon--open-file 4)))
+   (global-set-key (kbd "C-c h 1") (lambda () (interactive) (harpoon-open-entry 1)))
+   (global-set-key (kbd "C-c h 2") (lambda () (interactive) (harpoon-open-entry 2)))
+   (global-set-key (kbd "C-c h 3") (lambda () (interactive) (harpoon-open-entry 3)))
+   (global-set-key (kbd "C-c h 4") (lambda () (interactive) (harpoon-open-entry 4)))
    
-   (global-set-key (kbd "C-c h a 1") (lambda () (interactive) (harpoon-add-file 1)))
-   (global-set-key (kbd "C-c h a 2") (lambda () (interactive) (harpoon-add-file 2)))
-   (global-set-key (kbd "C-c h a 3") (lambda () (interactive) (harpoon-add-file 3)))
-   (global-set-key (kbd "C-c h a 4") (lambda () (interactive) (harpoon-add-file 4)))
+   (global-set-key (kbd "C-c h a 1") (lambda () (interactive) (harpoon-add-file-or-buffer 1)))
+   (global-set-key (kbd "C-c h a 2") (lambda () (interactive) (harpoon-add-file-or-buffer 2)))
+   (global-set-key (kbd "C-c h a 3") (lambda () (interactive) (harpoon-add-file-or-buffer 3)))
+   (global-set-key (kbd "C-c h a 4") (lambda () (interactive) (harpoon-add-file-or-buffer 4)))
 
 For Evil mode users (as shown in the :doc:`usage` section):
 
 .. code-block:: elisp
 
    (define-key evil-normal-state-map (kbd "SPC h A") 'harpoon-open-or-create)
-   (define-key evil-normal-state-map (kbd "SPC h 1") (lambda () (interactive) (harpoon--open-file 1)))
+   (define-key evil-normal-state-map (kbd "SPC h 1") (lambda () (interactive) (harpoon-open-entry 1)))
    ;; ... and so on
 
 Customizing the Harpoon List
@@ -45,7 +45,7 @@ The harpoon list is stored in a simple text file, with one file path per line. Y
 
 1. Edit it manually by opening the file
 2. Use the ``harpoon-open-or-create`` function to open it in a buffer
-3. Use the ``harpoon-add-file`` function to programmatically add files
+3. Use the ``harpoon-add-file-or-buffer`` function to programmatically add files
 
 The file format is simple: each line contains a full path to a file. Lines are numbered from 1 to 4, corresponding to the position argument used in the functions.
 

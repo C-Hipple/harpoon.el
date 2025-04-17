@@ -14,7 +14,7 @@
 ;; with that hotkey.  Files can be hotswapped easily.
 
 ;;
-;; Use Bind keys for harpoon--open-file harpoon--add-file called with a number argument.
+;; Use Bind keys for harpoon-open-entry harpoon-add-file-or-buffer called with a number argument.
 ;; Then you can add files with that command, and then jump to them immediately.
 
 ;;; Code:
@@ -23,31 +23,34 @@
 (setq harpoon--file "~/harpoon-el")
 
 ;;;###autoload
-(defun harpoon--open-file (line-number)
+(defun harpoon-open-entry (line-number)
   "Reads `~/harpoon-el` and opens the file on LINE-NUMBER in the existing buffer if it's a valid file."
   (interactive)
   (let ((harpoon-file (expand-file-name harpoon--file))
         file-to-open)
-    (if (file-readable-p harpoon-file)
-        (with-temp-buffer
-          (insert-file-contents harpoon-file)
-          (goto-char (point-min))
-          (forward-line (1- line-number))
-          (setq file-to-open (string-trim (buffer-substring (line-beginning-position) (line-end-position))))
-          (if (and (file-exists-p file-to-open)
-                   (file-regular-p file-to-open))
-              (find-file file-to-open)
-            (message "No valid file on line %d of %s" line-number harpoon-file)))
-      (message "%s is not readable." harpoon-file))))
+    (with-temp-buffer
+      (insert-file-contents harpoon-file)
+      (goto-char (point-min))
+      (forward-line (1- line-number))
+      (setq file-to-open (string-trim (buffer-substring (line-beginning-position) (line-end-position))))
+      (message "here")
+      (message (concat "Checking: " file-to-open))
+      (if-let ((harpoon-to-buffer (get-buffer file-to-open)))
+          (switch-to-buffer harpoon-to-buffer)
+        (if (and (file-exists-p file-to-open)
+                 (file-regular-p file-to-open))
+            (find-file file-to-open)))
+      (message "No valid file on line %d of %s" line-number harpoon-file))
+    (message "%s is not readable." harpoon-file)))
 
 
 ;;;###autoload
-(defun harpoon-add-file (line-number)
-  "Adds the current buffer's file path to `~/harpoon-el` at LINE-NUMBER, replacing the existing line."
+(defun harpoon-add-file-or-buffer (line-number)
+  "Adds the current buffer to `~/harpoon-el` at LINE-NUMBER, replacing the existing line."
   (interactive)
-  (let ((current-file (buffer-file-name))
+  (let ((current-identifier (harpoon--get-buffer-identifier))
         (harpoon-file (expand-file-name harpoon--file)))
-    (if (not current-file)
+    (if (not current-identifier)
         (message "Buffer not visiting a file.")
       (let ((harpoon-buffer (find-file-noselect harpoon-file)))
         (with-current-buffer harpoon-buffer
@@ -57,11 +60,16 @@
                 line-end)
             (setq line-end (line-end-position))
             (delete-region line-start line-end)
-            (insert current-file)
+            (insert current-identifier)
             (save-buffer)
             (kill-buffer harpoon-buffer)
-            (message "Replaced line %d of %s with '%s'" line-number harpoon-file current-file)))))))
+            (message "Replaced line %d of %s with '%s'" line-number harpoon-file current-identifier)))))))
 
+(defun harpoon--get-buffer-identifier ()
+  "Returns buffer filename if buffer else buffer name"
+  (if (buffer-file-name)
+      (buffer-file-name)
+    (buffer-name)))
 
 ;;;###autoload
 (defun harpoon-open-or-create ()
@@ -73,6 +81,5 @@
           (save-buffer)
           (switch-to-buffer (current-buffer)))
       (find-file file-path))))
-
 
 (provide 'harpoon)
