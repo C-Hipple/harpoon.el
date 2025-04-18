@@ -4,9 +4,9 @@ Usage
 Basic Usage
 ----------
 
-harpoon.el provides a simple way to quickly switch between frequently used files. The package maintains a list of files in ``~/harpoon-el`` and allows you to quickly jump to any of them using numeric hotkeys.
+harpoon.el provides a simple way to quickly switch between frequently used files/buffers. The package maintains a list of targets and allows you to quickly jump to any of them using numeric hotkeys.
 
-Adding Files
+Adding Buffers or Files
 -----------
 
 To add the current buffer/file to your harpoon list at position 1:
@@ -35,12 +35,12 @@ To view and edit your harpoon list:
 
    (harpoon-open-or-create)
 
-This will open the ``~/harpoon-el`` file in a buffer, allowing you to manually edit the list of files.
+This will open the ``~/harpoon-el`` file in a buffer, allowing you to manually edit the list of files/buffers.
 
 Example Workflow
 ---------------
 
-1. Open a file you want to add to your harpoon list
+1. Open a buffer you want to add to your harpoon list, whether it's visiting a file or running a process.
 2. Add it to a position: ``(harpoon-add-file-or-buffer 1)``
 3. Later, quickly switch to it: ``(harpoon-open-entry 1)``
 
@@ -65,5 +65,5 @@ If you're using Evil mode, you can set up keybindings like this:
 
 This setup provides:
 - ``SPC h A`` to open the harpoon list
-- ``SPC h 1-4`` to jump to files
-- ``SPC h a 1-4`` to add files
+- ``SPC h 1-4`` to jump to targets
+- ``SPC h a 1-4`` to add files/buffers

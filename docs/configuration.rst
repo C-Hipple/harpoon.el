@@ -56,4 +56,4 @@ Example harpoon list file:
    /home/user/projects/main.py
    /home/user/docs/notes.org
    /home/user/config/emacs.org
-   /home/user/todo.org 
+   /home/user/todo.org
