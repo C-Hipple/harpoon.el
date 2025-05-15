@@ -33,16 +33,12 @@
       (goto-char (point-min))
       (forward-line (1- line-number))
       (setq file-to-open (string-trim (buffer-substring (line-beginning-position) (line-end-position))))
-      (message "here")
-      (message (concat "Checking: " file-to-open))
       (if-let ((harpoon-to-buffer (get-buffer file-to-open)))
           (switch-to-buffer harpoon-to-buffer)
         (if (and (file-exists-p file-to-open)
                  (file-regular-p file-to-open))
-            (find-file file-to-open)))
-      (message "No valid file on line %d of %s" line-number harpoon-file))
-    (message "%s is not readable." harpoon-file)))
-
+            (find-file file-to-open))
+        (message "No valid file on line %d of %s" line-number harpoon-file)))))
 
 ;;;###autoload
 (defun harpoon-add-file-or-buffer (line-number)
