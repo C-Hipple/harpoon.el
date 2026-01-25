@@ -2,7 +2,7 @@
 
 ;; Author: Chris Hipple
 ;; URL: https://github.com/C-Hipple/harpoon.el
-;; Version: 1.0.3
+;; Version: 1.0.4
 ;; Package-Requires: ((emacs "25.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0+
@@ -22,11 +22,11 @@
 (require 'subr-x)
 
 ;;;###autoload
-(setq harpoon--file "~/.harpoon-el")
+(setq harpoon--file (expand-file-name ".harpoon" user-emacs-directory))
 
 ;;;###autoload
 (defun harpoon-open-entry (line-number)
-  "Reads `~/harpoon-el` and opens the file on LINE-NUMBER in the existing buffer if it's a valid file."
+  "Reads harpoon--file and opens the file on LINE-NUMBER in the existing buffer if it's a valid file."
   (interactive)
   (let ((harpoon-file (expand-file-name harpoon--file))
         file-to-open)
@@ -45,7 +45,7 @@
 
 ;;;###autoload
 (defun harpoon-add-file-or-buffer (line-number)
-  "Adds the current buffer to `~/harpoon-el` at LINE-NUMBER, replacing the existing line."
+  "Adds the current buffer to harpoon--file at LINE-NUMBER, replacing the existing line."
   (interactive)
   (let ((current-identifier (harpoon--get-buffer-identifier))
         (harpoon-file (expand-file-name harpoon--file)))
@@ -72,7 +72,7 @@
 
 ;;;###autoload
 (defun harpoon-open-or-create ()
-  "Opens (and creates if it doesn't exist) the file `~/harpoon-el` in a minibuffer and moves the cursor to it."
+  "Opens (and creates if it doesn't exist) the harpoon--file in a minibuffer and moves the cursor to it."
   (interactive)
   (let ((file-path (expand-file-name harpoon--file)))
     (if (not (file-exists-p file-path))
