@@ -2,7 +2,7 @@
 
 ;; Author: Chris Hipple
 ;; URL: https://github.com/C-Hipple/harpoon.el
-;; Version: 1.0.2
+;; Version: 1.0.3
 ;; Package-Requires: ((emacs "25.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0+
@@ -22,7 +22,7 @@
 (require 'subr-x)
 
 ;;;###autoload
-(setq harpoon--file "~/harpoon-el")
+(setq harpoon--file "~/.harpoon-el")
 
 ;;;###autoload
 (defun harpoon-open-entry (line-number)
