@@ -2,7 +2,7 @@
 
 ;; Author: Chris Hipple
 ;; URL: https://github.com/C-Hipple/harpoon.el
-;; Version: 1.0.1
+;; Version: 1.0.2
 ;; Package-Requires: ((emacs "25.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0+
@@ -18,6 +18,8 @@
 ;; Then you can add files with that command, and then jump to them immediately.
 
 ;;; Code:
+
+(require 'subr-x)
 
 ;;;###autoload
 (setq harpoon--file "~/harpoon-el")
@@ -37,8 +39,9 @@
           (switch-to-buffer harpoon-to-buffer)
         (if (and (file-exists-p file-to-open)
                  (file-regular-p file-to-open))
-            (find-file file-to-open))
-        (message "No valid file on line %d of %s" line-number harpoon-file)))))
+            (find-file file-to-open)
+          (message "No valid file on line %d of %s" line-number harpoon-file))))))
+
 
 ;;;###autoload
 (defun harpoon-add-file-or-buffer (line-number)
