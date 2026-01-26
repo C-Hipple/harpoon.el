@@ -42,7 +42,7 @@ Variables
    The path to the harpoon list file.
 
    :type: string
-   :default: "~/harpoon-el"
+   :default: "~/.emacs.d/.harpoon"
 
    This variable stores the path to the file that contains the list of harpooned files. You can customize this to store the list in a different location.
 

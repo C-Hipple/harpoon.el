@@ -4,7 +4,7 @@ Configuration
 Basic Configuration
 -----------------
 
-The main configuration option in harpoon.el is the location of the harpoon list file. By default, it's set to ``~/harpoon-el``, but you can change it by setting the ``harpoon--file`` variable:
+The main configuration option in harpoon.el is the location of the harpoon list file. By default, it's set to ``~/.emacs.d/.harpoon``, but you can change it by setting the ``harpoon--file`` variable:
 
 .. code-block:: elisp
 

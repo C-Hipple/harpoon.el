@@ -35,7 +35,7 @@ To view and edit your harpoon list:
 
    (harpoon-open-or-create)
 
-This will open the ``~/harpoon-el`` file in a buffer, allowing you to manually edit the list of files/buffers.
+This will open the ``~/.emacs.d/.harpoon`` file in a buffer, allowing you to manually edit the list of files/buffers.
 
 Example Workflow
 ---------------
