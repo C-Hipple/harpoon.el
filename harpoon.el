@@ -2,7 +2,7 @@
 
 ;; Author: Chris Hipple
 ;; URL: https://github.com/C-Hipple/harpoon.el
-;; Version: 1.0.5
+;; Version: 1.0.6
 ;; Package-Requires: ((emacs "25.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0+
@@ -37,10 +37,12 @@
       (setq file-to-open (string-trim (buffer-substring (line-beginning-position) (line-end-position))))
       (if-let ((harpoon-to-buffer (get-buffer file-to-open)))
           (switch-to-buffer harpoon-to-buffer)
-        (if (and (file-exists-p file-to-open)
-                 (file-regular-p file-to-open))
-            (find-file file-to-open)
-          (message "No valid file on line %d of %s" line-number harpoon-file))))))
+        (if-let ((harpoon-to-buffer (find-buffer-visiting file-to-open)))
+            (switch-to-buffer harpoon-to-buffer)
+          (if (and (file-exists-p file-to-open)
+                   (file-regular-p file-to-open))
+              (find-file file-to-open)
+            (message "No valid file on line %d of %s" line-number harpoon-file)))))))
 
 
 ;;;###autoload
